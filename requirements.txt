@@ -1,0 +1,13 @@
+Flask
+python-dotenv
+google-generativeai
+openai
+PyYAML
+notion-client
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+Pillow
+TTS
+pydub
+transformers==4.33.0

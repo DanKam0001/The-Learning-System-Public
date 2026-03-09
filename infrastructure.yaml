@@ -1,0 +1,34 @@
+# ==========================================
+# SYSTEM INFRASTRUCTURE & FILE PATHS
+# ==========================================
+
+directories:
+  # The master root folder for all generated content
+  base_data_dir: "data"
+  
+  # Sub-directories for specific pipelines
+  audiobooks: "data/audiobooks"
+  audio_notes: "data/audio"
+  reading: "data/read"
+  flashcards: "data/slides"
+  
+  # Legacy folders (Kept for the Review Bot's backward compatibility)
+  legacy_learn: "data/learn"
+
+system_files:
+  # State tracking and caching
+  glossary_cache: "data/glossary_cache.txt"
+  weekly_syllabus: "this_weeks_syllabus.txt"
+  
+  # Hardware / Media
+  reference_voice: "reference.wav"
+
+auth_files:
+  # External API credentials
+  google_token: "token.json"
+  google_credentials: "credentials.json"
+  env_file: ".env"
+
+models:
+  # Local AI model paths
+  coqui_tts: "tts_models/multilingual/multi-dataset/xtts_v2"

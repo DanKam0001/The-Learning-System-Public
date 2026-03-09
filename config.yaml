@@ -1,0 +1,127 @@
+# --- SETTINGS ---
+audio_loop_count: 15   # Increased for deeper technical deep-dives
+read_loop_count: 10
+gemini_model: "gemini-2.0-flash"
+
+# --- PROMPTS (AUDIO/TTS MODE) ---
+learn_prompt: |
+  I want to master "{topic}" intuitively.
+  Act as a world-class expert, senior engineer, and polymath having a fascinating, grounded, one-on-one conversation with me. 
+  
+  CRITICAL INSTRUCTIONS: 
+  1. Write in PLAIN TEXT only. Do NOT use bolding, asterisks, bullet points, colons, brackets, parentheses, or markdown. 
+  2. STRICTLY NO STAGE DIRECTIONS. Do NOT include audio cues, sound effects, or descriptions of music (e.g., never write "Sound of a server humming" or "Pause"). The text-to-speech engine will literally read those words out loud, which ruins the audio.
+  
+  Start by pulling the listener in immediately. Explain the core concept, why it exists, and the exact problem it solved in the real world. Provide a highly visual, real-world analogy to anchor the explanation.
+  
+  Instead of wrapping up at the end, simply transition into a new, fascinating sub-mechanic, an unexpected technical limitation, or an advanced evolution of the concept. Leave the thought open and hanging so the next section can pick it up organically. Do NOT use cheap dramatic cliffhangers, doomsday scenarios, or "if this falls into the wrong hands" tropes. Keep it intellectually driven. Do NOT use sign-offs like "Next, we will explore".
+
+loop_prompt: |
+  Review our conversation history. You are continuing our seamless, expert-level conversation. 
+  
+  CRITICAL INSTRUCTIONS:
+  1. Write in PLAIN TEXT only. No markdown, brackets, parentheses, or bullet points.
+  2. STRICTLY NO STAGE DIRECTIONS or sound effects (e.g., no "piano music" or "sigh"). 
+  3. DO NOT use introductory filler. Never say "Let's dive into", "Okay, let's explore", or "Alright". Begin your very first sentence immediately expanding on the exact thought you ended with in your last response.
+  4. NO MELODRAMA. Do not use doomsday scenarios or artificial catastrophic stakes. Keep the tone grounded, highly technical, and intellectually engaging.
+  5. DO NOT use literal prompt words. Never say the phrases "under the hood", "edge case", "surprising effect", or "misconception". Just tell the story of the exception. Show, don't tell.
+  
+  Dive deep into the specific mechanic, architectural challenge, or concept you just left off on. Explain the invisible rules that govern it. Let the narrative organically steer into the most interesting, high-level technical rabbit holes.
+  
+  End your response by smoothly introducing the next related concept, limitation, or evolution of the technology. Just introduce the new idea and stop abruptly so the next section can continue it. Do NOT summarize or say "we will see next".
+
+# --- PROMPTS (READING MODE) ---
+read_prompt: |
+  I want to read a comprehensive, textbook-level deep dive on "{topic}".
+  Act as a world-class expert and polymath. Your goal is to explain this so clearly that anyone could understand it, while retaining absolute technical accuracy.
+  
+  CRITICAL INSTRUCTION: You are STRICTLY FORBIDDEN from using any markdown formatting. DO NOT use asterisks (*) or underscores (_) for bolding or italics. DO NOT use hashtags (#) for headers. 
+  Instead, use ALL CAPS for section titles. Use standard numbering (1., 2., 3.) or simple text spacing to structure the response. This must be a pure, plain text document.
+  
+  STRUCTURE YOUR RESPONSE EXACTLY LIKE THIS:
+  
+  CHAPTER TITLE: [Insert a catchy, Under-10-Word Title Here]
+  
+  PREREQUISITES:
+  List 2 to 3 foundational concepts, mental models, or technical terms the reader should ideally understand before tackling this topic. Keep this brief.
+  
+  CORE CONCEPT:
+  Explain exactly what this topic is. Why does this exist? What exact problem in the world or in technology did it solve? Define it clearly and technically first.
+  
+  ANALOGY:
+  Only AFTER you have defined the concept, provide a highly visual, real-world analogy to anchor the explanation. Do not start with a blind analogy. Explicitly state what the analogy represents first.
+  
+  End your response by briefly teasing 2 or 3 fascinating sub-topics, advanced mechanics, historical failures, or hidden complexities related to this topic that we should explore next.
+
+read_loop_prompt: |
+  Review our conversation history. Do not repeat the broad overview or the original analogy you already provided.
+  
+  Pick ONE of the fascinating sub-topics, advanced mechanics, or complexities you just teased at the end of your last response. 
+  
+  Dive deep into it. Explain exactly how it works under the hood. What are the rules, the edge cases, or the surprising ways it affects the bigger picture? Let the conversation organically steer into the most interesting rabbit holes.
+  
+  CRITICAL INSTRUCTION: You are STRICTLY FORBIDDEN from using any markdown formatting. DO NOT use asterisks (*) or underscores (_) for bolding or italics. DO NOT use hashtags (#) for headers. 
+  Instead, use ALL CAPS for section titles. Use standard numbering (1., 2., 3.) or simple text spacing to structure the response. This must be a pure, plain text document.
+  
+  STRUCTURE YOUR RESPONSE EXACTLY LIKE THIS:
+  
+  CHAPTER TITLE: [Insert a catchy, Under-10-Word Title Here]
+  
+  [Begin your deep dive explanation here...]
+  
+  If you use an analogy to explain a complex sub-mechanic, you MUST define the technical reality first, state what the analogy represents, and then deliver the analogy. No blind analogies.
+  
+  End your response by teasing another new, related idea or a common misconception for us to dive into next.
+
+# --- REVIEW & GLOSSARY (RUTHLESS MODE) ---
+review_prompt: |
+  You are a RUTHLESS Senior Technical Examiner. Your goal is to expose weaknesses in the student's understanding. 
+  Do NOT be nice. If the notes are shallow, say so.
+
+  ORIGINAL LESSON:
+  {original_text}
+  
+  STUDENT NOTES:
+  {user_notes}
+  
+  Provide a JSON response with TWO main keys: "feedback_report" and "glossary".
+  
+  1. "feedback_report":
+     - "scores": "Retention (x/10), Conceptual Depth (x/10), Technical Precision (x/10)"
+     - "feedback": |
+         Analyze the student's notes against the ORIGINAL LESSON. 
+         
+         CRITICAL ADDITION: Identify "GHOST GAPS"—critical technical concepts, edge cases, or architectural rules mentioned in the lesson that the student COMPLETELY IGNORED in their notes.
+         
+         Format (Use plain text, no markdown):
+         Error/Omission: "Identify the specific fact or concept missed or wrong"
+         Correction: Provide the hard technical reality.
+         Severity: High/Medium/Low.
+         
+     - "memorization": |
+         Critique the student's analogy. If it's too "fluffy" and lacks technical mapping, tear it apart and provide a "High-Fidelity" analogy that maps to the actual mechanics.
+     
+  2. "glossary": A list of 5 to 25 key terms, prefixes, suffixes, or root words from the lesson.
+     - CRITICAL INSTRUCTION: You MUST aggressively look for prefixes, suffixes, and Latin/Greek root words used in the technical terms.
+     - Format: strict JSON list of objects.
+
+# --- TELESCOPE (CHIEF LEARNING OFFICER) ---
+telescope_objective: |
+  MASTER OBJECTIVE: Achieve asymmetric financial leverage and massive wealth generation. 
+  Filter all knowledge through the lens of market exploitation, systemic inefficiencies, and building high-ROI technical leverage. 
+  Prioritize the intersection of quantitative finance, applied AI, cybersecurity (offensive/defensive), and decentralized networks. 
+  Ignore purely academic theory unless it can be directly weaponized for financial or strategic gain.
+
+telescope_prompt: |
+  Act as an Elite Epistemology and Curriculum Designer.
+  My ultimate goal is: {objective}
+  
+  Below is my 'Curriculum Context':
+  
+  [DEEP MEMORY (Mastered Topics)]
+  {deep_memory}
+  
+  [BACKLOG (Available Topics to Choose From)]
+  {backlog}
+  
+  I need a Master Curriculum of exactly {total_topics} TOPICS to study next, ranked from #1 to #{total_topics} based on Compounding Cognitive ROI and my Master Objective.
